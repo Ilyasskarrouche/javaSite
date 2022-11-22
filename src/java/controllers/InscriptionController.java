@@ -57,7 +57,7 @@ public class InscriptionController extends HttpServlet {
 
         clientDao.create(client);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("register-success.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
         dispatcher.forward(request, response);
     }
 }

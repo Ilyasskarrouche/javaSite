@@ -4,6 +4,9 @@
     Author     : PC
 --%>
 
+<%@page import="entities.Produit"%>
+<%@page import="com.oracle.jrockit.jfr.Producer"%>
+<%@page import="Service.ProduitService"%>
 <%@page import="entities.Marque"%>
 <%@page import="Service.MarqueService"%>
 <%@page import="entities.Categorie"%>
@@ -80,7 +83,7 @@
                             <div class="name">Image</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="file" name="image" id="image">
+                                    <input class="input--style-5" type="text" name="image" id="image">
                                 </div>
                             </div>
                         </div>
@@ -105,10 +108,12 @@
 
                                                 </select>
                                             </div>
+                                                                   
                        <div class="form-group">
                                                 <label>Marque :</label>
+                                                <div class="rs-select2 js-select-simple select--no-search">
                                                 <select name="marque" class="js-example-basic-single w-100">
-                                                    <option></option>
+                                                    <option disabled="disabled" selected="selected"></option>
                                                     <%
                                                         MarqueService ms = new MarqueService();
                                                         for (Marque c : ms.findAll()) {
@@ -146,9 +151,11 @@
 						<table class="table">
 						  <thead class="thead-primary">
 						    <tr>
+                                                      <th>Id</th>
 						      <th>Nom</th>
 						      <th>Desination</th>
 						      <th>Prix</th>
+                                                      <th>Image</th>
 						      <th>Unite</th>
                                                       <th>Categorie</th>
                                                       <th>Marque</th>
@@ -158,16 +165,26 @@
 						  </thead>
 						  <tbody>
                                                     
-                                                    <tr>    
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
+                                                      
+                                                        <%
+                                                           
+                                                            ProduitService ps = new ProduitService();
+                                                            for(Produit p : ps.findAll())
+                                                            {
+                                                        %>
+                                                    <tr> 
+                                                        <td><%= p.getId()%></td>
+                                                        <td><%= p.getNom()%></td>
+                                                        <td><%= p.getDesignation()%></td>
+                                                        <td><%= p.getPrix() %></td>
+                                                        <td><%= p.getImage() %></td>
+                                                        <td><%= p.getInite() %></td>
+                                                        <td><%= cs.findById(p.getCategorie().getId()).getNom() %></td>
+                                                        <td><%= ms.findById(p.getMarque().getId()).getNom() %></td>
                                                         <td><button class="btn btn--radius-2 btn--red" type="submit">Delete</button>
                                                         <button class="btn btn--radius-2 btn--red" type="submit">Update</button></td>
                                                     </tr>
+                                                    <%}%>
 						  </tbody>
 						</table>
 					</div>

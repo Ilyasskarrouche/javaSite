@@ -4,6 +4,8 @@
     Author     : PC
 --%>
 
+<%@page import="Service.CategorieService"%>
+<%@page import="entities.Categorie"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
 
@@ -91,14 +93,18 @@
                                                       
 						    </tr>
 						  </thead>
-						  <tbody>
-                                                     
+						   <tbody>
+                                                      <%
+                                                        CategorieService cs = new CategorieService();
+                                                        for(Categorie c : cs.findAll()){
+                                                      %> 
                                                     <tr>   
-                                                        <td></td>
-                                                        <td></td>
+                                                        <td><%= c.getId() %></td>
+                                                        <td><%= c.getNom() %></td>
                                                         <td><button class="btn btn--radius-2 btn--red" type="submit">Delete</button>
                                                         <button class="btn btn--radius-2 btn--red" type="submit">Update</button></td>
                                                     </tr>
+                                                    <%}%>
 						  </tbody>
 						</table>
 					</div>

@@ -21,9 +21,7 @@
 </head>
 <body>
  <div class="container">
- <div class="row text-center" style="color: tomato;">
-  <h2>User Registration with JSP, Servlet and Hibernate</h2>
- </div>
+ 
  <hr>
   <div class="row col-md-10 col-md-offset-3"> 
    

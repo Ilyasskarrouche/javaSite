@@ -4,6 +4,8 @@
     Author     : PC
 --%>
 
+<%@page import="entities.Marque"%>
+<%@page import="Service.MarqueService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
 
@@ -95,13 +97,18 @@
 						    </tr>
 						  </thead>
 						  <tbody>
-                                                      
+                                                      <%
+                                                       MarqueService ms = new MarqueService();
+                                                       for(Marque m : ms.findAll())
+                                                       {
+                                                      %> 
                                                     <tr>  
-                                                        <td></td>
-                                                        <td></td>
+                                                        <td> <%= m.getId()%></td>
+                                                        <td><%= m.getNom()%></td>
                                                         <td><button class="btn btn--radius-2 btn--red" type="submit">Delete</button>
                                                         <button class="btn btn--radius-2 btn--red" type="submit">Update</button></td>
-                                                    </tr>  
+                                                    </tr>
+                                                    <%}%>
 						  </tbody>
 						</table>
 					</div>
