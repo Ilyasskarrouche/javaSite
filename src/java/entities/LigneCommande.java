@@ -5,17 +5,26 @@
  */
 package entities;
 
+import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Lachgar
  */
+@NamedQueries ( {
+       @NamedQuery(name = "findByLigneCommandePK", query = "select l from LigneCommande l where l.commandePK = :lck"),
+        @NamedQuery(name = "findLigneCommandeByCommande", query = "select l.commandePK , l.prixVente , l.quantité , l.produit.nom , l.produit.image from LigneCommande l where l.commandePK.commandeId = :c") 
+})
+
+
 @Entity
-public class LigneCommande {
+public class LigneCommande implements Serializable {
     @EmbeddedId
     private LigneCommandePK commandePK;
     private double prixVente;
@@ -30,6 +39,24 @@ public class LigneCommande {
     public LigneCommande() {
     }
 
+    public LigneCommande(LigneCommandePK commandePK, double prixVente, int quantité) {
+        this.commandePK = commandePK;
+        this.prixVente = prixVente;
+        this.quantité = quantité;
+    }
+
+
+
+    public LigneCommande(LigneCommandePK commandePK, double prixVente, int quantité, Produit produit, Commande commande) {
+        this.commandePK = commandePK;
+        this.prixVente = prixVente;
+        this.quantité = quantité;
+        this.produit = produit;
+        this.commande = commande;
+    }
+    
+    
+    
     public LigneCommandePK getCommandePK() {
         return commandePK;
     }
@@ -69,6 +96,12 @@ public class LigneCommande {
     public void setCommande(Commande commande) {
         this.commande = commande;
     }
+
+    @Override
+    public String toString() {
+        return "LigneCommande{" + "commandePK=" + commandePK + ", prixVente=" + prixVente + ", quantit\u00e9=" + quantité + ", produit=" + produit + ", commande=" + commande + '}';
+    }
     
+   
     
 }

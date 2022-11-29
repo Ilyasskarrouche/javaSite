@@ -51,7 +51,7 @@ public class InscriptionController extends HttpServlet {
         client.setPrenom(prenom);
         client.setNom(nom);
          client.setAdresse(adresse);
-          client.setTelephone(telephone);
+          client.setTel(telephone);
         client.setEmail(email);
         client.setPassword(password);
 

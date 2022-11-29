@@ -5,18 +5,25 @@
  */
 package entities;
 
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Lachgar
  */
 @Entity
-public class Produit {
+@NamedQuery(name = "findProduit", query = "select p.id , p.nom , p.designation, p.prix , p.image from Produit p")
+public class Produit implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -24,45 +31,47 @@ public class Produit {
     private String designation;
     private double prix;
     private String image;
-    private String inite;
-    @ManyToOne(targetEntity = Marque.class)
-    private Marque marque;
-    @ManyToOne(targetEntity = Categorie.class)
+    private String unite;
+    
+    @ManyToOne(cascade = CascadeType.DETACH)
     private Categorie categorie;
     
-    public Produit() {
-    }
+    @ManyToOne(cascade = CascadeType.DETACH)
+    private Marque marque;
+    
+    @OneToMany(mappedBy = "produit",fetch = FetchType.EAGER)
+    private List<LigneCommande> lignecommande;
 
-    public Produit(String nom, String designation, double prix, String image, String inite, Marque marque, Categorie categorie) {
+    public Produit(String nom, String designation, double prix, String image, Categorie categorie, Marque marque) {
         this.nom = nom;
         this.designation = designation;
         this.prix = prix;
         this.image = image;
-        this.inite = inite;
-        this.marque = marque;
         this.categorie = categorie;
+        this.marque = marque;
     }
 
-   
+    public Produit(String nom, String designation, double prix, String image, String unite, Categorie categorie, Marque marque) {
+        this.nom = nom;
+        this.designation = designation;
+        this.prix = prix;
+        this.image = image;
+        this.unite = unite;
+        this.categorie = categorie;
+        this.marque = marque;
+       
+    }
+
+    public String getUnite() {
+        return unite;
+    }
+
+    public void setUnite(String unite) {
+        this.unite = unite;
+    }
 
     public String getDesignation() {
         return designation;
-    }
-
-    public Marque getMarque() {
-        return marque;
-    }
-
-    public void setMarque(Marque marque) {
-        this.marque = marque;
-    }
-
-    public Categorie getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
     }
 
     public void setDesignation(String designation) {
@@ -85,12 +94,32 @@ public class Produit {
         this.image = image;
     }
 
-    public String getInite() {
-        return inite;
+    public Categorie getCategorie() {
+        return categorie;
     }
 
-    public void setInite(String inite) {
-        this.inite = inite;
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
+    public List<LigneCommande> getLignecommande() {
+        return lignecommande;
+    }
+
+    public void setLignecommande(List<LigneCommande> lignecommande) {
+        this.lignecommande = lignecommande;
+    }
+    
+    public Marque getMarque() {
+        return marque;
+    }
+
+    public void setMarque(Marque marque) {
+        this.marque = marque;
+    }
+    
+
+    public Produit() {
     }
 
     public int getId() {
@@ -107,6 +136,11 @@ public class Produit {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    @Override
+    public String toString() {
+        return "Produit{" + "id=" + id + ", nom=" + nom + ", designation=" + designation + ", prix=" + prix + ", image=" + image + '}';
     }
     
     

@@ -5,38 +5,38 @@
  */
 package entities;
 
+import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
  *
- * @author HP
+ * @author User
  */
+
 @Entity
-public class Categorie {
-     @Id
+@NamedQuery(name = "findCategorie", query = "select c.id , c.nom from Categorie c")
+
+public class Categorie implements Serializable {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
     private String nom;
-     @OneToMany(mappedBy = "categorie",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "categorie", fetch =  FetchType.EAGER)
     private List<Produit> produits;
-    @ManyToOne 
-    private Categorie categories;
-    @OneToMany(mappedBy = "categories",fetch = FetchType.EAGER)
-    private List<Categorie> sousCategorie;
-
-    public Categorie(String nom, List<Produit> produits) {
-        this.nom = nom;
-        this.produits = produits;
-       
-    }
-
+   
+    @ManyToOne
+    private Categorie categorie;
+    
     public Categorie() {
     }
 
@@ -44,7 +44,11 @@ public class Categorie {
         this.nom = nom;
     }
 
-   
+    public Categorie(String nom, Categorie categorie) {
+        this.nom = nom;
+        this.categorie = categorie;
+    }
+    
     public List<Produit> getProduits() {
         return produits;
     }
@@ -53,7 +57,14 @@ public class Categorie {
         this.produits = produits;
     }
 
-     
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
     public int getId() {
         return id;
     }
@@ -69,5 +80,15 @@ public class Categorie {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    @Override
+    public String toString() {
+        return "Categorie{" + "id=" + id + ", nom=" + nom + '}';
+    }
+    
+    
+    
+    
+    
     
 }

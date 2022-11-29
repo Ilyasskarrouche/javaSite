@@ -11,43 +11,30 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
  *
- * @author HP
+ * @author User
  */
 @Entity
+@NamedQuery(name = "findMarque", query = "select m.id , m.nom from Marque m")
 public class Marque {
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id; 
     private String nom;
-     @OneToMany(mappedBy = "marque",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "marque",fetch = FetchType.EAGER)
     private List<Produit> produits;
 
-    public Marque(String nom, List<Produit> produits) {
-        this.nom = nom;
-        this.produits = produits;
+    public Marque() {
     }
 
     public Marque(String nom) {
         this.nom = nom;
     }
 
-    public Marque() {
-    }
-     
-
-    public List<Produit> getProduits() {
-        return produits;
-    }
-
-    public void setProduits(List<Produit> produits) {
-        this.produits = produits;
-    }
-     
-     
     public int getId() {
         return id;
     }
@@ -60,9 +47,24 @@ public class Marque {
         return nom;
     }
 
+    public List<Produit> getProduits() {
+        return produits;
+    }
+
+    public void setProduits(List<Produit> produits) {
+        this.produits = produits;
+    }
+    
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    @Override
+    public String toString() {
+        return "Marque{" + "id=" + id + ", nom=" + nom + '}';
+    }
+    
+    
     
     
 }

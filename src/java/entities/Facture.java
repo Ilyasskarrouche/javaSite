@@ -5,6 +5,7 @@
  */
 package entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
@@ -17,37 +18,28 @@ import javax.persistence.Temporal;
 
 /**
  *
- * @author HP
+ * @author User
  */
 @Entity
-public class Facture {
-     @Id
+
+public class Facture implements Serializable {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-     @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date date;
     private double montant;
     @OneToMany(mappedBy = "facture",fetch = FetchType.EAGER)
     private List<Commande> commandes;
 
-    public Facture(Date date, double montant, List<Commande> commandes) {
+    public Facture(Date date, double montant) {
         this.date = date;
         this.montant = montant;
-        this.commandes = commandes;
     }
 
     public Facture() {
     }
 
-    public List<Commande> getCommandes() {
-        return commandes;
-    }
-
-    public void setCommandes(List<Commande> commandes) {
-        this.commandes = commandes;
-    }
-    
-    
     public int getId() {
         return id;
     }
@@ -60,6 +52,14 @@ public class Facture {
         return date;
     }
 
+    public List<Commande> getCommandes() {
+        return commandes;
+    }
+
+    public void setCommandes(List<Commande> commandes) {
+        this.commandes = commandes;
+    }
+    
     public void setDate(Date date) {
         this.date = date;
     }
@@ -71,8 +71,11 @@ public class Facture {
     public void setMontant(double montant) {
         this.montant = montant;
     }
-    
-   
+
+    @Override
+    public String toString() {
+        return "Facture{" + "id=" + id + ", date=" + date + ", montant=" + montant + '}';
+    }
     
     
     

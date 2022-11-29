@@ -9,10 +9,11 @@ import javax.persistence.Entity;
 
 /**
  *
- * @author HP
+ * @author User
  */
 @Entity
-public class Admin extends User {
+
+public class Admin extends User{
 
     public Admin() {
     }
@@ -21,6 +22,14 @@ public class Admin extends User {
         super(email, password);
     }
 
-   
+    @Override
+    public String toString() {
+        return "Admin{" + '}';
+    }
+
+    
+    
+    
+    
     
 }

@@ -59,7 +59,7 @@ public class AddProduit extends HttpServlet {
          produit.setDesignation(designation);
           produit.setPrix(prix);
            produit.setImage(image);
-            produit.setInite(unite);
+            produit.setUnite(unite);
              produit.setMarque(marque);
               produit.setCategorie(categorie);
 

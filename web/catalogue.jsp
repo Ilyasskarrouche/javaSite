@@ -28,7 +28,448 @@
     <link href="assets/ItemSlider/css/main-style.css" rel="stylesheet" />
     <!-- custom CSS here -->
     <link href="assets/css/style.css" rel="stylesheet" />
+    <script src="script/jquery-3.3.1.min.js" type="text/javascript"></script>
+    
+    <script src="script/cart.js" type="text/javascript"></script>
 </head>
+
+
+<style>
+ 
+
+/* Please ❤ this if you like it! */
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.sec-center {
+  position: relative;
+  max-width: 100%;
+  text-align: center;
+  z-index: 200;
+}
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked){
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+.dark-light:checked + label,
+.dark-light:not(:checked) + label{
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  z-index: 20000;
+  display: block;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  cursor: pointer;
+  transition: all 200ms linear;
+  box-shadow: 0 0 25px rgba(255,235,167,.45);
+}
+.dark-light:checked + label{
+  transform: rotate(360deg);
+}
+.dark-light:checked + label:after,
+.dark-light:not(:checked) + label:after{
+  position: absolute;
+  content: '';
+  top: 1px;
+  left: 1px;
+  overflow: hidden;
+  z-index: 2;
+  display: block;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  background-color: #102770;
+  background-image: url('https://assets.codepen.io/1462889/moon.svg');
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 200ms linear;
+  opacity: 0;
+}
+.dark-light:checked + label:after {
+  opacity: 1;
+}
+.dark-light:checked + label:before,
+.dark-light:not(:checked) + label:before{
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 1;
+  display: block;
+  border-radius: 50%;
+  width: 46px;
+  height: 46px;
+  background-color: #48dbfb;
+  background-image: url('https://assets.codepen.io/1462889/sun.svg');
+  background-size: 25px 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 200ms linear;
+}
+.dark-light:checked + label:before{
+  background-color: #000;
+}
+.light-back{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #fff;
+  overflow: hidden;
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+  background-position: center;
+  background-repeat: repeat;
+  background-size: 4%;
+  height: 100%;
+  width: 100%;
+  transition: all 200ms linear;
+  opacity: 0;
+}
+.dark-light:checked ~ .light-back{
+  opacity: 1;
+}
+.dropdown:checked + label,
+.dropdown:not(:checked) + label{
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 2;
+  height: 50px;
+  transition: all 200ms linear;
+  border-radius: 4px;
+  width: 220px;
+  letter-spacing: 1px;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-flex-pack: center;
+  text-align: center;
+  border: none;
+  background-color: #ffeba7;
+  cursor: pointer;
+  color: #102770;
+  box-shadow: 0 12px 35px 0 rgba(255,235,167,.15);
+}
+.dark-light:checked ~ .sec-center .for-dropdown{
+  background-color: #102770;
+  color: #ffeba7;
+  box-shadow: 0 12px 35px 0 rgba(16,39,112,.25);
+}
+.dropdown:checked + label:before,
+.dropdown:not(:checked) + label:before{
+  position: fixed;
+  top: 0;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  cursor: auto;
+  pointer-events: none;
+}
+.dropdown:checked + label:before{
+  pointer-events: auto;
+}
+.dropdown:not(:checked) + label .uil {
+  font-size: 24px;
+  margin-left: 10px;
+  transition: transform 200ms linear;
+}
+.dropdown:checked + label .uil {
+  transform: rotate(180deg);
+  font-size: 24px;
+  margin-left: 10px;
+  transition: transform 200ms linear;
+}
+.section-dropdown {
+  position: absolute;
+  padding: 5px;
+  background-color: #111;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+  box-shadow: 0 14px 35px 0 rgba(9,9,12,0.4);
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 200ms linear;
+}
+.dark-light:checked ~ .sec-center .section-dropdown {
+  background-color: #fff;
+  box-shadow: 0 14px 35px 0 rgba(9,9,12,0.15);
+}
+.dropdown:checked ~ .section-dropdown{
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.section-dropdown:before {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  content: '';
+  display: block;
+  z-index: 1;
+}
+.section-dropdown:after {
+  position: absolute;
+  top: -7px;
+  left: 30px;
+  width: 0; 
+  height: 0; 
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent; 
+  border-bottom: 8px solid #111;
+  content: '';
+  display: block;
+  z-index: 2;
+  transition: all 200ms linear;
+}
+.dark-light:checked ~ .sec-center .section-dropdown:after {
+  border-bottom: 8px solid #fff;
+}
+
+a {
+  position: relative;
+  color: #fff;
+  transition: all 200ms linear;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 2px;
+  padding: 5px 0;
+  padding-left: 20px;
+  padding-right: 15px;
+  margin: 2px 0;
+  text-align: left;
+  text-decoration: none;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: space-between;
+    -ms-flex-pack: distribute;
+}
+.dark-light:checked ~ .sec-center .section-dropdown a {
+  color: #102770;
+}
+a:hover {
+  color: #102770;
+  background-color: #ffeba7;
+}
+.dark-light:checked ~ .sec-center .section-dropdown a:hover {
+  color: #ffeba7;
+  background-color: #102770;
+}
+a .uil {
+  font-size: 22px;
+}
+.dropdown-sub:checked + label,
+.dropdown-sub:not(:checked) + label{
+  position: relative;
+  color: #fff;
+  transition: all 200ms linear;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 2px;
+  padding: 5px 0;
+  padding-left: 20px;
+  padding-right: 15px;
+  text-align: left;
+  text-decoration: none;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: space-between;
+    -ms-flex-pack: distribute;
+    cursor: pointer;
+}
+.dropdown-sub:checked + label .uil,
+.dropdown-sub:not(:checked) + label .uil{
+  font-size: 22px;
+}
+.dropdown-sub:not(:checked) + label .uil {
+  transition: transform 200ms linear;
+}
+.dropdown-sub:checked + label .uil {
+  transform: rotate(135deg);
+  transition: transform 200ms linear;
+}
+.dropdown-sub:checked + label:hover,
+.dropdown-sub:not(:checked) + label:hover{
+  color: #102770;
+  background-color: #ffeba7;
+}
+.dark-light:checked ~ .sec-center .section-dropdown .for-dropdown-sub{
+  color: #102770;
+}
+.dark-light:checked ~ .sec-center .section-dropdown .for-dropdown-sub:hover{
+  color: #ffeba7;
+  background-color: #102770;
+}
+
+.section-dropdown-sub {
+  position: relative;
+  display: block;
+  width: 100%;
+  pointer-events: none;
+  opacity: 0;
+  max-height: 0;
+  padding-left: 10px;
+  padding-right: 3px;
+  overflow: hidden;
+  transition: all 200ms linear;
+}
+.dropdown-sub:checked ~ .section-dropdown-sub{
+  pointer-events: auto;
+  opacity: 1;
+  max-height: 999px;
+}
+.section-dropdown-sub a {
+  font-size: 14px;
+}
+.section-dropdown-sub a .uil {
+  font-size: 20px;
+}
+.logo {
+	position: fixed;
+	top: 50px;
+	left: 40px;
+	display: block;
+	z-index: 11000000;
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+	transition: all 250ms linear;
+}
+.logo:hover {
+  background-color: transparent;
+}
+.logo img {
+	height: 26px;
+	width: auto;
+	display: block;
+  transition: all 200ms linear;
+}
+.dark-light:checked ~ .logo img{
+  filter: brightness(10%);
+}
+
+@media screen and (max-width: 991px) {
+.logo {
+	top: 30px;
+	left: 20px;
+}
+.dark-light:checked + label,
+.dark-light:not(:checked) + label{
+  top: 20px;
+  right: 20px;
+}
+}   
+/* CSS */
+.button-85 {
+  margin-top:20px;
+  padding: 0.6em 2em;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-85:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-85 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.button-85:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}    
+    
+</style>
 <body>
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
@@ -48,7 +489,8 @@
 
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Track Order</a></li>
+                    <li><a href="panier.jsp"><i class="fa fa-shopping-cart"></i>  panier </a></li>
+                    
                     <li><a href="login.jsp">Login</a></li>
                     <li><a href="register.jsp">Signup</a></li>
 
@@ -86,32 +528,45 @@ document.productForm.submit();
 return true;
 }
     </script>
-            <div class="col-md-9">
-                <div>
-                    <ol class="breadcrumb">
-                        categorie
+    
+        
+            <div class="col-md-9" >
+                <div >
+                    <ol class="breadcrumb" style="margin-left:300px;display: flex;justify-content: center; " >
+                       
                         <form method="get" action="catalogue.jsp" name="productForm" >
-                        <select  id="categorie" name="categorie" onchange="return setValue();" >
-                           <%
+                            
+                            
+                        
+  	
+
+  	<div class="sec-center"> 
+            
+            
+	  	<input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
+	  	<label class="for-dropdown" for="dropdown">Categorie <i class="uil uil-arrow-down"></i></label>
+  		<div class="section-dropdown"> 
+                    
+                    <%
                             
                             CategorieService cs = new CategorieService();
                             for(Categorie c : cs.findAll()){
-                            if(request.getParameter("categorie") != null){    
-                            if (c.getId()== Integer.parseInt(request.getParameter("categorie")) ){
                             
                             %>
+                    
+                            
+  			
+  			<a href="?categorie=<%= c.getId()%>"> <%= c.getNom() %><i class="uil uil-arrow-right"></i></a>
+                         <%}%>
                         
-                        <option  value = <%= c.getId()%> selected>
-                            <%= c.getNom() %>
-                        </option>
-                        <%}}%>
-                        %>
+                      
+  		</div>
+  	 
+                     
+                
+
                         
-                        <option  value = <%= c.getId()%> >
-                            <%= c.getNom() %>
-                        </option>
-                        <%}%>
-                        </select>
+                        </div>   
                         </form>
                          
                     </ol>
@@ -119,22 +574,15 @@ return true;
                 <!-- /.div -->
             
                       
-      <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">By Price Low</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">By Price High</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">By Popularity</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">By Reviews</a></li>
-                            </ul>
+      
+                           
+                           
                         </div>
                     </div>
                 </div>
                 <!-- /.row -->
-               
+             
+                   
                 <div class="row">
                        
                     <%
@@ -150,8 +598,18 @@ return true;
                     <div class="col-md-4 text-center col-sm-6 col-xs-6">
                         <div class="thumbnail product-box">
                             <img src="assets/img/dummyimg.png" alt="" />
+                              
                             <div class="caption"  >
-                               <p>nom : <%= p.getNom() %> </p>
+                               <form action="/AddtoCart" method="get"> 
+                               <p ><input name="id" value="<%= p.getId() %>" type="hidden"></input>nom : <%= p.getNom() %> </p>
+                               <p>designation: <%= p.getDesignation() %> </p>
+                               <p>prix : <%= p.getPrix() %> </p>
+                               <input name="nb" value="1" type="hidden">
+                               <!-- HTML !-->
+                               <button class="button-85"  type="submit"  >  Ajouter au panier</button>
+                               </form>
+
+                               
                                 
                                   
                             
@@ -159,14 +617,29 @@ return true;
                         </div>
                         
                     </div>
-                    <%}}%>             
+                    <%}}%>  
+                     
+                    <div class="col-md-8">
+<table>
+
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</form>
+</fieldset>
+ 
+ 
+             
                        
                     <!-- /.col -->
                    
                     <!-- /.col -->
                   
                 <!-- /.row -->
-                <div class="row">
+             <!--   <div class="row">
                     <ul class="pagination alg-right-pad">
                         <li><a href="#">&laquo;</a></li>
                         <li><a href="#">1</a></li>
@@ -187,67 +660,12 @@ return true;
         
          
        
- <div class="row">
-            <div class="col-md-4">
-                <strong>Send a Quick Query </strong>
-                <hr>
-                <form>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" required="required" placeholder="Name">
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" required="required" placeholder="Email address">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <textarea name="message" id="message" required="required" class="form-control" rows="3" placeholder="Message"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Submit Request</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+  
 
-            <div class="col-md-4">
-                <strong>Our Location</strong>
-                <hr>
-                <p>
-                     sidi mousssa eljadida <br />
-                                    
-                    Call: 0662889527<br>
-                    Email: kamiselmehdi@gmail.com<br>
-                </p>
-
-                 
-            </div>
-            <div class="col-md-4 social-box">
-                <strong>We are Social </strong>
-                <hr>
-                <a href="#"><i class="fa fa-facebook-square fa-3x "></i></a>
-                <a href="#"><i class="fa fa-twitter-square fa-3x "></i></a>
-                <a href="#"><i class="fa fa-google-plus-square fa-3x c"></i></a>
-                <a href="#"><i class="fa fa-linkedin-square fa-3x "></i></a>
-                <a href="#"><i class="fa fa-pinterest-square fa-3x "></i></a>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl odio. Mauris vehicula at nunc id posuere. Curabitur nec nisl odio. Mauris vehicula at nunc id posuere. 
-                </p>
-            </div>
-        </div>
-        <hr>
-    </div>
+             
+           
     <!-- /.col -->
-    <div class="col-md-12 end-box ">
-        &copy; 2014 | &nbsp; All Rights Reserved | &nbsp; www.yourdomain.com | &nbsp; 24x7 support | &nbsp; Email us: info@yourdomain.com
-    </div>
+    
     <!-- /.col -->
     <!--Footer end -->
     <!--Core JavaScript file  -->
@@ -264,5 +682,7 @@ return true;
 
         });
 		</script>
+                 
+     
 </body>
 </html>

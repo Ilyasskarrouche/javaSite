@@ -8,6 +8,7 @@ package entities;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -15,34 +16,30 @@ import javax.persistence.OneToMany;
  * @author Lachgar
  */
 @Entity
-public class Client extends User {
+
+
+public class Client extends User{
+    
     private String nom;
     private String prenom;
-    private String telephone;
+    private String tel; 
     private String adresse;
+    
     @OneToMany(mappedBy = "client",fetch = FetchType.EAGER)
     private List<Commande> commandes;
+    
+    
     
     public Client() {
     }
 
-    public Client(String nom, String prenom, String telephone, String adresse, List<Commande> commandes, String email, String password) {
+    public Client(String nom, String prenom, String tel, String adresse, String email, String password) {
         super(email, password);
         this.nom = nom;
         this.prenom = prenom;
-        this.telephone = telephone;
+        this.tel = tel;
         this.adresse = adresse;
-        this.commandes = commandes;
     }
-
-    public List<Commande> getCommandes() {
-        return commandes;
-    }
-
-    public void setCommandes(List<Commande> commandes) {
-        this.commandes = commandes;
-    }
-   
 
     public String getNom() {
         return nom;
@@ -60,12 +57,20 @@ public class Client extends User {
         this.prenom = prenom;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public List<Commande> getCommandes() {
+        return commandes;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setCommandes(List<Commande> commandes) {
+        this.commandes = commandes;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
     public String getAdresse() {
@@ -76,7 +81,12 @@ public class Client extends User {
         this.adresse = adresse;
     }
 
-   
-
+    @Override
+    public String toString() {
+        return "Client{" + "nom=" + nom + ", prenom=" + prenom + ", tel=" + tel + ", adresse=" + adresse + '}';
+    }
+    
+    
+    
     
 }
