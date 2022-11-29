@@ -66,7 +66,7 @@ public class AddProduit extends HttpServlet {
 
         produitservice.create(produit);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("register-success.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("produit.jsp");
         dispatcher.forward(request, response);
     }
 }
