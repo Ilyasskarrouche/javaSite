@@ -50,7 +50,7 @@ public class AddCategorie extends HttpServlet {
 
         categorieservice.create(categorie);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("register-success.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("categorie.jsp");
         dispatcher.forward(request, response);
     }
 

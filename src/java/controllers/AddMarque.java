@@ -49,7 +49,7 @@ public class AddMarque extends HttpServlet {
 
         marqueservice.create(marque);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("register-success.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("marque.jsp");
         dispatcher.forward(request, response);
     }
 }
