@@ -43,15 +43,16 @@ public class AddProduit extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.sendRedirect("register.jsp");
+        response.sendRedirect("registeparseDouble(request.getParameter(\"prix\"));\n" +
+"          String image = requr.jsp");
     }
 
     private void register(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String nom = request.getParameter("nom");
         String designation = request.getParameter("desination");
          Double prix = Double.parseDouble(request.getParameter("prix"));
-          String image = request.getParameter("image");
            String unite = request.getParameter("unite");
+            String image= request.getParameter("image");
             Marque marque= ms.findById(Integer.parseInt(request.getParameter("marque")));
             Categorie categorie = cs.findById(Integer.parseInt(request.getParameter("categorie")));
         Produit produit = new Produit();
