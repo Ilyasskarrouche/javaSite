@@ -35,7 +35,7 @@ public class Commande implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Temporal(TemporalType.TIME)
+    
     private Date date;
     
     
@@ -108,6 +108,11 @@ public class Commande implements Serializable{
 
     public void setLignecommande(List<LigneCommande> lignecommande) {
         this.lignecommande = lignecommande;
+    }
+
+    @Override
+    public String toString() {
+        return "Commande{" + "id=" + id + ", date=" + date + ", client=" + client + ", facture=" + facture + ", lignecommande=" + lignecommande + ", status=" + status + '}';
     }
     
     

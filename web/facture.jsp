@@ -4,10 +4,6 @@
     Author     : ELMEHDI KAMIS
 --%>
 
-<%@page import="Service.LigneCommandeService"%>
-<%@page import="Service.CommandeService"%>
-<%@page import="entities.LigneCommande"%>
-<%@page import="entities.Commande"%>
 <%@page import="entities.Produit"%>
 <%@page import="Service.ProduitService"%>
 
@@ -583,39 +579,23 @@ a .uil {
                             <tr class="text-uppercase bg-light">
                               
                                 <th scope="col">Numero</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">Prix</th>
+                                <th scope="col">Statu</th>
                                 <th scope="col">Afficher Details</th>
-                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
                             
-                            <%
-                           CommandeService cs= new CommandeService();
-                           
-                           for (Commande c :cs.findAll()){
-                               
-                        %> 
+                            
+                            
                             <tr>
                                 
-                                <td><%= c.getId() %></td>
-                                <td><%= c.getDate() %></td>                             
-                                <td><%= c.getStatus() %> </td>
-                                <td><form action="detailsCommande.jsp" method="GET"><input name="numero" value="<%= c.getId() %>" type="hidden"><button type="submit" class="button-85 supprimer" >Afficher les details</button></form></td>
-                            
-                            
-                            <% if (c.getStatus().equals("en cours")){%> 
-                                <td></td>
-                            <%}else{%> 
-                            <td><form action="facture_1.jsp" methode="get"><input name="id" value="<%= c.getId() %>" type="hidden"><button type="submit" class="button-85 supprimer" >Afficher facture</button></form></td>
-                            <%}}%>
-                            
+                                <td>1</td>
+                                <td>1800</td>
+                                <td>Livrée</td>
+                                <td><form action="/detailsCommande.jsp?numero=1200"><button type="submit" class="button-85 supprimer" >Afficher les details</button></form></td>
+                                
                             </tr>
-                      
-    
-                            
-                            
                             
                             
                             

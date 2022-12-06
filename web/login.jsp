@@ -30,7 +30,7 @@
     </div> 
     <button type ="submit" class ="btn"> LogIn</button> 
     <div class="text-center p-t-90">
-<a class="txt1" href="forgotPassword.jsp">
+<a class="txt1" href="#">
 Forgot Password?
 </a>
 </div>

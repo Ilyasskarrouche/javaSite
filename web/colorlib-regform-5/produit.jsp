@@ -428,8 +428,8 @@ a[href*="#followme"]::before {
        <div class="sidebar-header">
        <div class="sidebar-brand">
          <a href="#">Gestion</a></div></div>
-       <li><a href="#">commande</a></li>
-      <li><a href="#">etat des commandes </a></li>
+       <li><a href="com.jsp">commande</a></li>
+      <li><a href="../clients">clients</a></li>
        
       <ul class="dropdown-menu animated fadeInLeft" role="menu">
       <div class="dropdown-header">Dropdown heading</div>

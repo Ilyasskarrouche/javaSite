@@ -567,7 +567,7 @@ a .uil {
         <div class="card bg-white" >
             <div class="card-header card-color">
                 <p class="h2 text-center text-uppercase font-weight-bold pt-2">Commande numero = <%=  request.getParameter("numero") %></p>
-                <p class="h2 text-center text-uppercase font-weight-bold pt-2">Prix : 1800</p>
+                <p class="h2 text-center text-uppercase font-weight-bold pt-2">Prix Total : 1800 DH</p>
             </div>
             <div class="card-body container-fluid" >
                 
@@ -590,7 +590,7 @@ a .uil {
                             
                             <tr>
                                 
-                                <td>Iphone</td>
+                                <td>Dell</td>
                                 <td>1800</td>
                                
                                 

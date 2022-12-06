@@ -137,4 +137,30 @@ public class CommandeService implements IDao<Commande> {
         }
         return commande;
     }
+    
+    public int findCmdEnCours(){
+        int i=0;
+        Session session = null;
+        Transaction tx = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            List listRes   =    session.createSQLQuery("select id from commande p where p.status = 'en cours' ").list();
+            tx = session.beginTransaction();
+            tx.commit();
+            if (listRes.isEmpty()==false){
+            i =  ((java.lang.Integer) listRes.get(0)).intValue();
+            }else{
+            i=0;
+            }
+            
+            
+        } catch (HibernateException e) {
+            if(tx != null)
+                tx.rollback();
+        } finally {
+            session.close();
+        }
+        return i;
+        
+    }
 }

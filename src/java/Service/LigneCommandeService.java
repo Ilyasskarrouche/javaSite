@@ -149,6 +149,29 @@ public class LigneCommandeService implements IDao<LigneCommande> {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
             lc =  session.getNamedQuery("findLigneCommandeByCommande").setParameter("c", c.getId()).list();
+            
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return lc;
+                
+    }
+    
+    
+    public List<LigneCommande> getByCommandeID(int id) {
+        List<LigneCommande> lc = null;
+        Session session = null;
+        Transaction tx = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            tx = session.beginTransaction();
+            lc =  (List<LigneCommande>) session.createSQLQuery("select * from lignecommande p where p.commandeId = "+id).list();
+            
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {

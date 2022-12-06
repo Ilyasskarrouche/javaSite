@@ -12,6 +12,9 @@
 
 
 
+<%@page import="Service.CommandeService"%>
+<%@page import="entities.Commande"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -588,10 +591,15 @@ a .uil {
                             
                             
                             <%
+                                
+                           CommandeService cs= new CommandeService();
+                           int id = cs.findCmdEnCours();
+                                
                            double somme =0;
                            LigneCommandeService ls = new LigneCommandeService();
                            ProduitService ps = new ProduitService();
                            for (LigneCommande l : ls.findAll()){
+                           if (l.getCommande().getStatus().equals("en cours")){
                            somme = somme+(l.getQuantité()*l.getPrixVente());
                            
                            
@@ -605,7 +613,7 @@ a .uil {
                                 <td><button type="button" class="button-85 supprimer"> <a href=./DeleteFromCart?idproduit=<%= l.getProduit().getId()%>&idcommande=<%= l.getCommande().getId()%> >Supprimer</button></td>
                                 
                             </tr>
-                         <%}%>  
+                         <%}}%>  
                             
                          
                             
@@ -626,7 +634,7 @@ a .uil {
         </tfoot>
                     </table>
                     <form >
-                        <button type="submit" class="button-85" style="margin-left: 850px"> <a href="commandes.jsp">Commender</button>
+                        <button type="submit" class="button-85" style="margin-left: 850px"> <a href="AddCommande?id=<%= id %>">Commender</button>
                     </form>
                 </div>
             </div>

@@ -1,13 +1,14 @@
 <%-- 
-    Document   : newjsp
-    Created on : Dec 6, 2022, 1:04:18 AM
+    Document   : client.jsp
+    Created on : Dec 6, 2022, 1:11:47 AM
     Author     : HP
 --%>
 
-<%@page import="Service.UserService"%>
-<%@page import="Service.FactureService"%>
 <%@page import="entities.Commande"%>
 <%@page import="Service.CommandeService"%>
+<%@page import="Service.ClientService"%>
+<%@page import="entities.Client"%>
+<%@page import="Service.UserService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,11 +53,7 @@ html { height: 100%;}
 .nav .open > a, 
 .nav .open > a:hover, 
 .nav .open > a:focus {background-color: transparent;}
-
-
 /*           Wrappers            */
-
-
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -64,11 +61,9 @@ html { height: 100%;}
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-
 #wrapper.toggled {
     padding-left: 220px;
 }
-
 #sidebar-wrapper {
     z-index: 1000;
     left: 220px;
@@ -83,32 +78,24 @@ html { height: 100%;}
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-
 #sidebar-wrapper::-webkit-scrollbar {
   display: none;
 }
-
 #wrapper.toggled #sidebar-wrapper {
     width: 220px;
 }
-
 #page-content-wrapper {
     width: 100%;
     padding-top: 70px;
 }
-
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
     margin-right: -220px;
 }
-
-
 /*     Sidebar nav styles        */
-
 .navbar {
   padding: 0;
 }
-
 .sidebar-nav {
     position: absolute;
     top: 0;
@@ -117,14 +104,12 @@ html { height: 100%;}
     padding: 0;
     list-style: none;
 }
-
 .sidebar-nav li {
     position: relative; 
     line-height: 20px;
     display: inline-block;
     width: 100%;
 }
-
 .sidebar-nav li:before {
     content: '';
     position: absolute;
@@ -138,7 +123,6 @@ html { height: 100%;}
       -moz-transition:  width .2s ease-in;
        -ms-transition:  width .2s ease-in;
             transition: width .2s ease-in;
-
 }
 .sidebar-nav li:first-child a {
     color: #fff;
@@ -159,7 +143,6 @@ html { height: 100%;}
 .sidebar-nav li:nth-child(5n+5):before {
     background-color: #7d5d81;   
 }
-
 .sidebar-nav li:hover:before,
 .sidebar-nav li.open:hover:before {
     width: 100%;
@@ -167,16 +150,13 @@ html { height: 100%;}
       -moz-transition:  width .2s ease-in;
        -ms-transition:  width .2s ease-in;
             transition: width .2s ease-in;
-
 }
-
 .sidebar-nav li a {
     display: block;
     color: #ddd;
     text-decoration: none;
     padding: 10px 15px 10px 30px;    
 }
-
 .sidebar-nav li a:hover,
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus,
@@ -278,10 +258,7 @@ a[href*="#followme"]::before {
   content: "\f099" !important;
   color: #0084b4;
 }
-
 /*       Hamburger-Cross         */
-
-
 .hamburger {
   position: fixed;
   top: 20px;  
@@ -316,7 +293,6 @@ a[href*="#followme"]::before {
   -webkit-transform: translate3d(-100px,0,0);
   -webkit-transition: all .35s ease-in-out;
 }
-
 .hamburger.is-closed .hamb-top,
 .hamburger.is-closed .hamb-middle,
 .hamburger.is-closed .hamb-bottom,
@@ -345,7 +321,6 @@ a[href*="#followme"]::before {
   bottom: 5px;  
   -webkit-transition: all .35s ease-in-out;
 }
-
 .hamburger.is-closed:hover .hamb-top {
   top: 0;
   -webkit-transition: all .35s ease-in-out;
@@ -391,11 +366,7 @@ a[href*="#followme"]::before {
   -webkit-transform: translate3d(-100px,0,0);
   -webkit-transition: all .35s ease-in-out;
 }
-
-
 /*            Overlay            */
-
-
 .overlay {
     position: fixed;
     display: none;
@@ -422,8 +393,8 @@ a[href*="#followme"]::before {
        <div class="sidebar-header">
        <div class="sidebar-brand">
          <a href="#">Gestion</a></div></div>
-       <li><a href="#services">commande</a></li>
-      <li><a href="#contact">etat des commandes </a></li>
+       <li><a href="com.jsp">commande</a></li>
+      <li><a href="client.jsp">clients </a></li>
        
       <ul class="dropdown-menu animated fadeInLeft" role="menu">
       <div class="dropdown-header">Dropdown heading</div>
@@ -431,7 +402,7 @@ a[href*="#followme"]::before {
       </ul>
       </li>
       
-      <li><a href="produit.jsp">Add Product</a></li>
+      <li><a href="colorlib-regform-5/produit.jsp">Add Product</a></li>
        <li><a href="categorie.jsp">Add Categorie</a></li>
        <li><a href="marque.jsp">Add Marque</a></li>
       </ul>
@@ -455,12 +426,12 @@ a[href*="#followme"]::before {
 
     </div>
     <!-- /#wrapper -->
-   
-    <section class="ftco-section">
+    
+     <section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Liste des Commande</h2>
+					<h2 class="heading-section">Liste des Commandes</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -469,45 +440,39 @@ a[href*="#followme"]::before {
 						<table class="table">
 						  <thead class="thead-primary">
 						    <tr>
-						      <th>Id</th>
-						      <th>Client</th>
-                                                      <th>Status</th>
-                                                      <th>Date</th>
-                                                      <th>Montant</th>
+						      <th>id</th>
+						      <th>status</th>
+                                                      <th>client</th>
+                                                      <th>date</th>
+                                                      
                                                       <th></th>
                                                       
 						    </tr>
 						  </thead>
-						   <tbody>
+                                                  
+                                                  <tbody>
                                                       <%
-//                                                        FactureService fs = new FactureService();
-//                                                        UserService us = new UserService();
                                                         CommandeService cs = new CommandeService();
-                                                        for(Commande c : cs.findAll()){
+                                                        for(Commande c  : cs.findAll()){
                                                       %> 
                                                     <tr>   
                                                         <td><%= c.getId() %></td>
-                                                        <td><%= c.getClient().getEmail() %></td>
                                                         <td><%= c.getStatus() %></td>
+                                                        <td><%= c.getClient() %></td>
                                                         <td><%= c.getDate() %></td>
-                                                        <td><%= c.getFacture().getMontant() %></td>
-                                                        <td><button class="btn btn--radius-2 btn--red" type="submit"><a href="./DeleteCommande?id=<%=c.getId()%> "> Delete</button>
-                                                        </td>
+                                                        
+                                                        <td><button class="btn btn--radius-2 btn--red" type="submit"><a href="./DeleteClient?id=<%=c.getId()%> "> Delete</button>
+                                                        
                                                     </tr>
                                                     <%}%>
 						  </tbody>
+						   
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-                        <div style="text-align: center;">
-                        <button class="btn btn--radius-2 btn--red" type="submit">commande livre</button>
-                        <button class="btn btn--radius-2 btn--red" type="submit">commande en cours</button>
-                        <button class="btn btn--radius-2 btn--red" type="submit">commande annule</button>    
-                        </div>                                         
-                                                 
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->
@@ -526,13 +491,10 @@ a[href*="#followme"]::before {
   var trigger = $('.hamburger'),
       overlay = $('.overlay'),
      isClosed = false;
-
     trigger.click(function () {
       hamburger_cross();      
     });
-
     function hamburger_cross() {
-
       if (isClosed == true) {          
         overlay.hide();
         trigger.removeClass('is-open');
@@ -553,5 +515,3 @@ a[href*="#followme"]::before {
     </script>
     
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-    
-</html>

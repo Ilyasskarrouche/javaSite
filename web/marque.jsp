@@ -420,8 +420,8 @@ a[href*="#followme"]::before {
        <div class="sidebar-header">
        <div class="sidebar-brand">
          <a href="#">Gestion</a></div></div>
-       <li><a href="#services">commande</a></li>
-      <li><a href="#contact">etat des commandes </a></li>
+       <li><a href="com.jsp">commande</a></li>
+      <li><a href="client.jsp">clients</a></li>
        
       <ul class="dropdown-menu animated fadeInLeft" role="menu">
       <div class="dropdown-header">Dropdown heading</div>
@@ -429,7 +429,7 @@ a[href*="#followme"]::before {
       </ul>
       </li>
       
-      <li><a href="produit.jsp">Add Product</a></li>
+      <li><a href="colorlib-regform-5/produit.jsp">Add Product</a></li>
        <li><a href="categorie.jsp">Add Categorie</a></li>
        <li><a href="marque.jsp">Add Marque</a></li>
       </ul>

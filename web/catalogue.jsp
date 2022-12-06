@@ -8,6 +8,9 @@
 <%@page import="Service.ProduitService"%>
 <%@page import="entities.Categorie"%>
 <%@page import="Service.CategorieService"%>
+
+<%@page import="entities.Marque"%>
+<%@page import="Service.MarqueService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -22,6 +25,7 @@
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <!-- Fontawesome core CSS -->
     <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="script/css/stylesCard.css" rel="stylesheet" />
     <!--GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <!--Slide Show Css -->
@@ -204,6 +208,7 @@
   margin-left: 10px;
   transition: transform 200ms linear;
 }
+
 .section-dropdown {
   position: absolute;
   padding: 5px;
@@ -229,6 +234,8 @@
   pointer-events: auto;
   transform: translateY(0);
 }
+
+
 .section-dropdown:before {
   position: absolute;
   top: -20px;
@@ -256,7 +263,132 @@
 .dark-light:checked ~ .sec-center .section-dropdown:after {
   border-bottom: 8px solid #fff;
 }
+.dark-light:checked ~ .sec-center .section-dropdown a {
+  color: #102770;
+}
+a:hover {
+  color: #102770;
+  background-color: #ffeba7;
+}
+.dark-light:checked ~ .sec-center .section-dropdown a:hover {
+  color: #ffeba7;
+  background-color: #102770;
+}
 
+.dark-light:checked ~ .sec-center .section-dropdown .for-dropdown-sub{
+  color: #102770;
+}
+.dark-light:checked ~ .sec-center .section-dropdown .for-dropdown-sub:hover{
+  color: #ffeba7;
+  background-color: #102770;
+}
+
+
+
+
+.section-dropdown2 {
+    position: absolute;
+    padding: 5px;
+    background-color: #111;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+    box-shadow: 0 14px 35px 0 rgba(9,9,12,0.4);
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: all 200ms linear;
+  }
+  .dark-light:checked ~ .sec-center .section-dropdown2 {
+    background-color: #fff;
+    box-shadow: 0 14px 35px 0 rgba(9,9,12,0.15);
+  }
+  .dropdown:checked ~ .section-dropdown2{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(50px);
+  }
+  
+  
+  .section-dropdown2:before {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    content: '';
+    display: block;
+    z-index: 1;
+  }
+  .section-dropdown2:after {
+    position: absolute;
+    top: -7px;
+    left: 30px;
+    width: 0; 
+    height: 0; 
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent; 
+    border-bottom: 8px solid #111;
+    content: '';
+    display: block;
+    z-index: 2;
+    transition: all 200ms linear;
+  }
+  .dark-light:checked ~ .sec-center .section-dropdown2:after {
+    border-bottom: 8px solid #fff;
+  }
+  .dark-light:checked ~ .sec-center .section-dropdown2 a {
+    color: #102770;
+  }
+  a:hover {
+    color: #102770;
+    background-color: #ffeba7;
+  }
+  .dark-light:checked ~ .sec-center .section-dropdown2 a:hover {
+    color: #ffeba7;
+    background-color: #102770;
+  }
+  
+  .dark-light:checked ~ .sec-center .section-dropdown2 .for-dropdown-sub{
+    color: #102770;
+  }
+  .dark-light:checked ~ .sec-center .section-dropdown2 .for-dropdown-sub:hover{
+    color: #ffeba7;
+    background-color: #102770;
+  }
+
+
+
+
+
+
+
+.section-dropdown-sub {
+  position: relative;
+  display: block;
+  width: 100%;
+  pointer-events: none;
+  opacity: 0;
+  max-height: 0;
+  padding-left: 10px;
+  padding-right: 3px;
+  overflow: hidden;
+  transition: all 200ms linear;
+}
+.dropdown-sub:checked ~ .section-dropdown-sub{
+  pointer-events: auto;
+  opacity: 1;
+  max-height: 999px;
+}
+.section-dropdown-sub a {
+  font-size: 14px;
+}
+.section-dropdown-sub a .uil {
+  font-size: 20px;
+}
 a {
   position: relative;
   color: #fff;
@@ -280,17 +412,7 @@ a {
   justify-content: space-between;
     -ms-flex-pack: distribute;
 }
-.dark-light:checked ~ .sec-center .section-dropdown a {
-  color: #102770;
-}
-a:hover {
-  color: #102770;
-  background-color: #ffeba7;
-}
-.dark-light:checked ~ .sec-center .section-dropdown a:hover {
-  color: #ffeba7;
-  background-color: #102770;
-}
+
 a .uil {
   font-size: 22px;
 }
@@ -334,37 +456,7 @@ a .uil {
   color: #102770;
   background-color: #ffeba7;
 }
-.dark-light:checked ~ .sec-center .section-dropdown .for-dropdown-sub{
-  color: #102770;
-}
-.dark-light:checked ~ .sec-center .section-dropdown .for-dropdown-sub:hover{
-  color: #ffeba7;
-  background-color: #102770;
-}
 
-.section-dropdown-sub {
-  position: relative;
-  display: block;
-  width: 100%;
-  pointer-events: none;
-  opacity: 0;
-  max-height: 0;
-  padding-left: 10px;
-  padding-right: 3px;
-  overflow: hidden;
-  transition: all 200ms linear;
-}
-.dropdown-sub:checked ~ .section-dropdown-sub{
-  pointer-events: auto;
-  opacity: 1;
-  max-height: 999px;
-}
-.section-dropdown-sub a {
-  font-size: 14px;
-}
-.section-dropdown-sub a .uil {
-  font-size: 20px;
-}
 .logo {
 	position: fixed;
 	top: 50px;
@@ -539,8 +631,14 @@ return true;
                             
                         
   	
-
-  	<div class="sec-center"> 
+         
+        <div class="row">    
+        <div class="sec-center"> 
+            
+           
+         <div class="col">       
+         
+  	 
             
             
 	  	<input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
@@ -552,21 +650,35 @@ return true;
                             CategorieService cs = new CategorieService();
                             for(Categorie c : cs.findAll()){
                             
-                            %>
-                    
-                            
-  			
+                    %>
   			<a href="?categorie=<%= c.getId()%>"> <%= c.getNom() %><i class="uil uil-arrow-right"></i></a>
-                         <%}%>
-                        
-                      
+                         <%}%>                     
+  		</div>
+  	  </div> 
+         <div class="col" >       
+                 
+         
+            
+            
+	  	<input class="dropdown"  type="checkbox" id="dropdown2" name="dropdown2"/>
+	  	<label class="for-dropdown" for="dropdown2">Marque <i class="uil uil-arrow-down"></i></label>
+  		<div class="section-dropdown2"> 
+                    
+                    <%
+                            
+                            MarqueService ms = new MarqueService();
+                            for(Marque m : ms.findAll()){
+                            
+                    %>
+  			<a href="?marque=<%= m.getId()%>"> <%= m.getNom() %><i class="uil uil-arrow-right"></i></a>
+                         <%}%>                     
   		</div>
   	 
-                     
-                
-
-                        
-                        </div>   
+        
+                 
+         </div>       
+         </div> 
+         </div>       
                         </form>
                          
                     </ol>
@@ -586,7 +698,7 @@ return true;
                 <div class="row">
                        
                     <%
-                           
+                           if (request.getParameter("categorie")!= null){
                            String id =  request.getParameter("categorie");
                            if ( id != null){
                            ProduitService ps = new ProduitService();
@@ -595,29 +707,79 @@ return true;
                            
                            
                         %>   
-                    <div class="col-md-4 text-center col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
-                            <img src="assets/img/<%= p.getImage()%>" alt=""  />
-                              
-                            <div class="caption"  >
-                               <form action="/AddtoCart" method="get"> 
-                               <p ><input name="id" value="<%= p.getId() %>" type="hidden"></input>nom : <%= p.getNom() %> </p>
-                               <p>designation: <%= p.getDesignation() %> </p>
-                               <p>prix : <%= p.getPrix() %> </p>
-                               <input name="nb" value="1" type="hidden">
-                               <!-- HTML !-->
-                               <button class="button-85"  type="submit"  >  Ajouter au panier</button>
-                               </form>
-
-                               
-                                
-                                  
-                            
-                            </div>
-                        </div>
+                    
+            <div class="col-md-4 text-center col-sm-6 col-xs-6">   
+                <form action="AddtoCart" method="get"> 
+    <div class="card">
+      <div class="card-image"></div>
+      <div class="card-text">
+        <!--<span class="date">4 days ago</span>-->
+        <h2> <%= p.getNom() %> </h2>
+        <p><%= p.getDesignation() %></p>
+        <input name="id" value="<%= p.getId() %>" type="hidden">
+        <input name="nb" value="1" type="hidden">
+        <button class="button-85"  type="submit"  >  Ajouter au panier</button>
+      </div>
+      <div class="card-stats">
+        <div class="stat">
+          <div class="value"><%= p.getPrix() %><sup>DH</sup></div>
+          <div class="type">prix</div>
+        </div>
+        <div class="stat border">
+          <div class="value"><%= p.getCategorie().getNom() %></div>
+          <div class="type">categorie</div>
+        </div>
+        <div class="stat">
+          <div class="value"><%= p.getMarque().getNom() %></div>
+          <div class="type">marque</div>
+        </div>
+      </div>
+    </div> 
+      
+      </form>
+       </div>                 
                         
-                    </div>
-                    <%}}%>  
+                    <%}}
+                    }else if (request.getParameter("marque")!= null){
+                    String id =  request.getParameter("marque");
+                    if ( id != null){
+                    ProduitService ps = new ProduitService();
+                    for (Produit p : ps.findByMq(ms.findById(Integer.parseInt(id)))){
+                    
+                    %>  
+                    
+                     <div class="col-md-4 text-center col-sm-6 col-xs-6">   
+                <form action="AddtoCart" method="get"> 
+    <div class="card">
+      <div class="card-image"></div>
+      <div class="card-text">
+        <!--<span class="date">4 days ago</span>-->
+        <h2> <%= p.getNom() %> </h2>
+        <p><%= p.getDesignation() %></p>
+        <input name="id" value="<%= p.getId() %>" type="hidden">
+        <input name="nb" value="1" type="hidden">
+        <button class="button-85"  type="submit"  >  Ajouter au panier</button>
+      </div>
+      <div class="card-stats">
+        <div class="stat">
+          <div class="value"><%= p.getPrix() %><sup>DH</sup></div>
+          <div class="type">prix</div>
+        </div>
+        <div class="stat border">
+          <div class="value"><%= p.getCategorie().getNom() %></div>
+          <div class="type">categorie</div>
+        </div>
+        <div class="stat">
+          <div class="value"><%= p.getMarque().getNom() %></div>
+          <div class="type">marque</div>
+        </div>
+      </div>
+    </div> 
+      
+      </form>
+       </div>  
+          
+                    <%}}} %> 
                      
                     <div class="col-md-8">
 <table>

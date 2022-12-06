@@ -51,11 +51,7 @@ html { height: 100%;}
 .nav .open > a, 
 .nav .open > a:hover, 
 .nav .open > a:focus {background-color: transparent;}
-
-
 /*           Wrappers            */
-
-
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -63,11 +59,9 @@ html { height: 100%;}
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-
 #wrapper.toggled {
     padding-left: 220px;
 }
-
 #sidebar-wrapper {
     z-index: 1000;
     left: 220px;
@@ -82,32 +76,24 @@ html { height: 100%;}
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-
 #sidebar-wrapper::-webkit-scrollbar {
   display: none;
 }
-
 #wrapper.toggled #sidebar-wrapper {
     width: 220px;
 }
-
 #page-content-wrapper {
     width: 100%;
     padding-top: 70px;
 }
-
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
     margin-right: -220px;
 }
-
-
 /*     Sidebar nav styles        */
-
 .navbar {
   padding: 0;
 }
-
 .sidebar-nav {
     position: absolute;
     top: 0;
@@ -116,14 +102,12 @@ html { height: 100%;}
     padding: 0;
     list-style: none;
 }
-
 .sidebar-nav li {
     position: relative; 
     line-height: 20px;
     display: inline-block;
     width: 100%;
 }
-
 .sidebar-nav li:before {
     content: '';
     position: absolute;
@@ -137,7 +121,6 @@ html { height: 100%;}
       -moz-transition:  width .2s ease-in;
        -ms-transition:  width .2s ease-in;
             transition: width .2s ease-in;
-
 }
 .sidebar-nav li:first-child a {
     color: #fff;
@@ -158,7 +141,6 @@ html { height: 100%;}
 .sidebar-nav li:nth-child(5n+5):before {
     background-color: #7d5d81;   
 }
-
 .sidebar-nav li:hover:before,
 .sidebar-nav li.open:hover:before {
     width: 100%;
@@ -166,16 +148,13 @@ html { height: 100%;}
       -moz-transition:  width .2s ease-in;
        -ms-transition:  width .2s ease-in;
             transition: width .2s ease-in;
-
 }
-
 .sidebar-nav li a {
     display: block;
     color: #ddd;
     text-decoration: none;
     padding: 10px 15px 10px 30px;    
 }
-
 .sidebar-nav li a:hover,
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus,
@@ -277,10 +256,7 @@ a[href*="#followme"]::before {
   content: "\f099" !important;
   color: #0084b4;
 }
-
 /*       Hamburger-Cross         */
-
-
 .hamburger {
   position: fixed;
   top: 20px;  
@@ -315,7 +291,6 @@ a[href*="#followme"]::before {
   -webkit-transform: translate3d(-100px,0,0);
   -webkit-transition: all .35s ease-in-out;
 }
-
 .hamburger.is-closed .hamb-top,
 .hamburger.is-closed .hamb-middle,
 .hamburger.is-closed .hamb-bottom,
@@ -344,7 +319,6 @@ a[href*="#followme"]::before {
   bottom: 5px;  
   -webkit-transition: all .35s ease-in-out;
 }
-
 .hamburger.is-closed:hover .hamb-top {
   top: 0;
   -webkit-transition: all .35s ease-in-out;
@@ -390,11 +364,7 @@ a[href*="#followme"]::before {
   -webkit-transform: translate3d(-100px,0,0);
   -webkit-transition: all .35s ease-in-out;
 }
-
-
 /*            Overlay            */
-
-
 .overlay {
     position: fixed;
     display: none;
@@ -421,8 +391,8 @@ a[href*="#followme"]::before {
        <div class="sidebar-header">
        <div class="sidebar-brand">
          <a href="#">Gestion</a></div></div>
-       <li><a href="#services">commande</a></li>
-      <li><a href="#contact">etat des commandes </a></li>
+       <li><a href="com.jsp">commande</a></li>
+      <li><a href="client.jsp">clients </a></li>
        
       <ul class="dropdown-menu animated fadeInLeft" role="menu">
       <div class="dropdown-header">Dropdown heading</div>
@@ -430,7 +400,7 @@ a[href*="#followme"]::before {
       </ul>
       </li>
       
-      <li><a href="produit.jsp">Add Product</a></li>
+      <li><a href="colorlib-regform-5/produit.jsp">Add Product</a></li>
        <li><a href="categorie.jsp">Add Categorie</a></li>
        <li><a href="marque.jsp">Add Marque</a></li>
       </ul>
@@ -519,13 +489,10 @@ a[href*="#followme"]::before {
   var trigger = $('.hamburger'),
       overlay = $('.overlay'),
      isClosed = false;
-
     trigger.click(function () {
       hamburger_cross();      
     });
-
     function hamburger_cross() {
-
       if (isClosed == true) {          
         overlay.hide();
         trigger.removeClass('is-open');
