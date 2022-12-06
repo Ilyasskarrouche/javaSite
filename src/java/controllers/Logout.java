@@ -5,8 +5,8 @@
  */
 package controllers;
 
-import Service.ProduitService;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,12 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author PC
+ * @author HP
  */
-@WebServlet(name = "DeleteProduit", urlPatterns = {"/DeleteProduit"})
-public class DeleteProduit extends HttpServlet {
-
-    ProduitService ms = new ProduitService();
+@WebServlet(name = "Logout", urlPatterns = {"/Logout"})
+public class Logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,9 +31,8 @@ public class DeleteProduit extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        ms.delete(ms.findById(id));
-        response.sendRedirect("colorlib-regform-5/produit.jsp");
+            response.sendRedirect("login.jsp");
+       }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

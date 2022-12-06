@@ -5,8 +5,9 @@
  */
 package controllers;
 
-import Service.ProduitService;
+import Service.ClientService;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,12 +16,21 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author PC
+ * @author HP
  */
-@WebServlet(name = "DeleteProduit", urlPatterns = {"/DeleteProduit"})
-public class DeleteProduit extends HttpServlet {
+@WebServlet(name = "DeleteClient", urlPatterns = {"/DeleteClient"})
+public class DeleteClient extends HttpServlet {
 
-    ProduitService ms = new ProduitService();
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    ClientService cs = new ClientService ();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,8 +44,8 @@ public class DeleteProduit extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        ms.delete(ms.findById(id));
-        response.sendRedirect("colorlib-regform-5/produit.jsp");
+        cs.delete(cs.findById(id));
+        response.sendRedirect("client.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

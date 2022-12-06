@@ -597,7 +597,7 @@ return true;
                         %>   
                     <div class="col-md-4 text-center col-sm-6 col-xs-6">
                         <div class="thumbnail product-box">
-                            <img src="assets/img/dummyimg.png" alt="" />
+                            <img src="assets/img/<%= p.getImage()%>" alt=""  />
                               
                             <div class="caption"  >
                                <form action="/AddtoCart" method="get"> 

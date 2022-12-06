@@ -1,19 +1,16 @@
 <%-- 
-    Document   : produit
-    Created on : 20 nov. 2022, 22:18:44
-    Author     : PC
+    Document   : newjsp
+    Created on : Dec 6, 2022, 1:04:18 AM
+    Author     : HP
 --%>
 
-<%@page import="entities.Produit"%>
-<%@page import="com.oracle.jrockit.jfr.Producer"%>
-<%@page import="Service.ProduitService"%>
-<%@page import="entities.Marque"%>
-<%@page import="Service.MarqueService"%>
-<%@page import="entities.Categorie"%>
-<%@page import="Service.CategorieService"%>
+<%@page import="Service.UserService"%>
+<%@page import="Service.FactureService"%>
+<%@page import="entities.Commande"%>
+<%@page import="Service.CommandeService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <!-- Required meta tags-->
@@ -24,7 +21,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Au Register Forms by Colorlib</title>
+    <title>Add</title>
 
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -43,7 +40,7 @@
 
     <!-- Main CSS-->
     <link href="colorlib-regform-5/css/main.css" rel="stylesheet" media="all">
-    
+     
     <style>
         body {
     position: relative;
@@ -231,7 +228,6 @@ html { height: 100%;}
 .dropdown-menu.show {
     top: 0;
 }
-
 .nav.sidebar-nav li a::before {
     font-family: fontawesome;
     content: "\f12e";
@@ -413,14 +409,11 @@ a[href*="#followme"]::before {
     z-index: 1;
 }
     </style>
-    
-</head>
+    </head>
 
 <body>
     
-    <body>
-    
- <div id="wrapper">
+    <div id="wrapper">
    <div class="overlay"></div>
     
         <!-- Sidebar -->
@@ -429,8 +422,8 @@ a[href*="#followme"]::before {
        <div class="sidebar-header">
        <div class="sidebar-brand">
          <a href="#">Gestion</a></div></div>
-       <li><a href="#">commande</a></li>
-      <li><a href="#">etat des commandes </a></li>
+       <li><a href="#services">commande</a></li>
+      <li><a href="#contact">etat des commandes </a></li>
        
       <ul class="dropdown-menu animated fadeInLeft" role="menu">
       <div class="dropdown-header">Dropdown heading</div>
@@ -462,105 +455,12 @@ a[href*="#followme"]::before {
 
     </div>
     <!-- /#wrapper -->
-    
-    
-    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-        <div class="wrapper wrapper--w790">
-            <div class="card card-5">
-                <div class="card-heading">
-                    <h2 class="title">Gestion des produit</h2>
-                </div>
-                <div class="card-body">
-                    <form action="/AddProduit" method="POST">
-                        
-                        <div class="form-row">
-                            <div class="name">Nom</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="text" name="nom" id="name">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Desination</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="text" name="desination" id="desination">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Prix</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="double" name="prix" id="prix">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Image</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="text" name="image" id="image">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="name">Unite</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="number" name="unite" id="unite">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                                                <label>Catégorie :</label>
-                                                <select name = "categorie" class="js-example-basic-single w-100">
-                                                    <option></option>
-                                                    <%
-                                                        CategorieService cs = new CategorieService();
-                                                        for (Categorie c : cs.findAll()) {
-                                                    %>
-                                                    <option value="<%= c.getId()%>"><%= c.getNom()%></option>
-                                                    <%}%>
-
-                                                </select>
-                                            </div>
-                                                                   
-                       <div class="form-group">
-                                                <label>Marque :</label>
-                                                <div class="rs-select2 js-select-simple select--no-search">
-                                                <select name="marque" class="js-example-basic-single w-100">
-                                                    <option disabled="disabled" selected="selected"></option>
-                                                    <%
-                                                        MarqueService ms = new MarqueService();
-                                                        for (Marque c : ms.findAll()) {
-                                                    %>
-                                                    <option value="<%= c.getId()%>"> <%= c.getNom()%> </option>
-                                                    <%}%>
-                                                </select>
-                                            </div>
-                        <div style="text-align: center;">
-                            <button class="btn btn--radius-2 btn--red" type="submit">Add</button>
-                        
-                            
-                        </div>
-                    </form>
-                </div>
-            </div>
-            
-
-                        
-                    
-          
-        </div>
-    </div>
-
+   
     <section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">Liste des produit</h2>
+					<h2 class="heading-section">Liste des Commande</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -569,38 +469,30 @@ a[href*="#followme"]::before {
 						<table class="table">
 						  <thead class="thead-primary">
 						    <tr>
-                                                      <th>Id</th>
-						      <th>Nom</th>
-						      <th>Desination</th>
-						      <th>Prix</th>
-                                                      <th>Image</th>
-						      <th>Unite</th>
-                                                      <th>Categorie</th>
-                                                      <th>Marque</th>
+						      <th>Id</th>
+						      <th>Client</th>
+                                                      <th>Status</th>
+                                                      <th>Date</th>
+                                                      <th>Montant</th>
                                                       <th></th>
-                                                     
+                                                      
 						    </tr>
 						  </thead>
-						  <tbody>
-                                                    
-                                                      
-                                                        <%
-                                                           
-                                                            ProduitService ps = new ProduitService();
-                                                            for(Produit p : ps.findAll())
-                                                            {
-                                                        %>
-                                                    <tr> 
-                                                        <td><%= p.getId()%></td>
-                                                        <td><%= p.getNom()%></td>
-                                                        <td><%= p.getDesignation()%></td>
-                                                        <td><%= p.getPrix() %></td>
-                                                        <td><%= p.getImage() %></td>
-                                                        <td><%= p.getUnite() %></td>
-                                                        <td><%= cs.findById(p.getCategorie().getId()).getNom() %></td>
-                                                        <td><%= ms.findById(p.getMarque().getId()).getNom() %></td>
-                                                        <td><button class="btn btn--radius-2 btn--red" type="submit"> <a href="./DeleteProduit?id=<%= p.getId()%> "> Delete</button>
-                                                        <button class="btn btn--radius-2 btn--red" type="submit">Update</button></td>
+						   <tbody>
+                                                      <%
+//                                                        FactureService fs = new FactureService();
+//                                                        UserService us = new UserService();
+                                                        CommandeService cs = new CommandeService();
+                                                        for(Commande c : cs.findAll()){
+                                                      %> 
+                                                    <tr>   
+                                                        <td><%= c.getId() %></td>
+                                                        <td><%= c.getClient().getEmail() %></td>
+                                                        <td><%= c.getStatus() %></td>
+                                                        <td><%= c.getDate() %></td>
+                                                        <td><%= c.getFacture().getMontant() %></td>
+                                                        <td><button class="btn btn--radius-2 btn--red" type="submit"><a href="./DeleteCommande?id=<%=c.getId()%> "> Delete</button>
+                                                        </td>
                                                     </tr>
                                                     <%}%>
 						  </tbody>
@@ -610,7 +502,13 @@ a[href*="#followme"]::before {
 			</div>
 		</div>
 	</section>
-   <!-- Jquery JS-->
+                        <div style="text-align: center;">
+                        <button class="btn btn--radius-2 btn--red" type="submit">commande livre</button>
+                        <button class="btn btn--radius-2 btn--red" type="submit">commande en cours</button>
+                        <button class="btn btn--radius-2 btn--red" type="submit">commande annule</button>    
+                        </div>                                         
+                                                 
+    <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->
     <script src="vendor/select2/select2.min.js"></script>
@@ -655,5 +553,5 @@ a[href*="#followme"]::before {
     </script>
     
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-
+    
 </html>

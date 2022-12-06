@@ -14,7 +14,7 @@
 <link href="files login/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <form method="doPost" action="/LoginController">
+    <form method="post" action="/LoginController">
     <img src ="files login/avatar.svg">
      
    
@@ -30,7 +30,7 @@
     </div> 
     <button type ="submit" class ="btn"> LogIn</button> 
     <div class="text-center p-t-90">
-<a class="txt1" href="#">
+<a class="txt1" href="forgotPassword.jsp">
 Forgot Password?
 </a>
 </div>

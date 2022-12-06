@@ -7,8 +7,6 @@
 <%@page import="entities.Produit"%>
 <%@page import="Service.ProduitService"%>
 
-<%@page import="Service.PanierService"%>
-<%@page import="entities.Panier"%>
 
 
 <%@page import="entities.Categorie"%>

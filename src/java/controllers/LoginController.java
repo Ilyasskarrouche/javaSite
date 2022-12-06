@@ -6,8 +6,14 @@
 package controllers;
 
 import Service.LoginDao;
+import entities.Admin;
+import entities.Client;
+import entities.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,36 +29,21 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController extends HttpServlet {
 
     private LoginDao loginDao;
-
+    private User user;
     
     
    public void init() {
         loginDao = new LoginDao();
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        response.sendRedirect("catalogue.jsp");
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -67,14 +58,36 @@ public class LoginController extends HttpServlet {
    private void authenticate(HttpServletRequest request, HttpServletResponse response)
     throws Exception {
         String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String password = MD5(request.getParameter("password"));
+        User user = LoginDao.findByEmail(email);
+        
 
         if (loginDao.validate(email, password)) {
+           if (user instanceof Client) {             
             RequestDispatcher dispatcher = request.getRequestDispatcher("catalogue.jsp");
             dispatcher.forward(request, response);
-        } else {
+        } 
+           else if(user instanceof Admin){
+               RequestDispatcher dispatcher = request.getRequestDispatcher("produit.jsp");
+            dispatcher.forward(request, response);
+           }
+        }
+                else {
             throw new Exception("Login not successful..");
         }
+    
+   }     
+   public static String MD5(String s) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            BigInteger bi = new BigInteger(1, md.digest(s.getBytes()));
+            return bi.toString(16);
+        } catch (NoSuchAlgorithmException ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
-}
+   }
+  
+
 

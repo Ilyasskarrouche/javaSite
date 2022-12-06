@@ -5,9 +5,13 @@
  */
 package Service;
 
+/**
+ *
+ * @author HP
+ */
 import dao.IDao;
 import entities.Produit;
-import entities.User;
+import entities.Client;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -16,13 +20,15 @@ import util.HibernateUtil;
 
 /**
  *
- * @author HP
+ * @author PC
  */
-public class LoginDao implements IDao<User> {
+public class ClientService implements IDao<Client> {
 
-   @Override
-    public boolean create(User o) {
-        UserService us = new UserService();
+     
+    
+    @Override
+    public boolean create(Client o) {
+        ClientService us = new ClientService();
         if( us.findByEmail(o.getEmail())==null ) {
                 Session session = null;
             Transaction tx = null;
@@ -46,7 +52,7 @@ public class LoginDao implements IDao<User> {
     }
 
     @Override
-    public boolean delete(User o) {
+    public boolean delete(Client o) {
         Session session = null;
         Transaction tx = null;
         try {
@@ -66,7 +72,7 @@ public class LoginDao implements IDao<User> {
     }
 
     @Override
-    public boolean update(User o) {
+    public boolean update(Client o) {
         Session session = null;
         Transaction tx = null;
         try {
@@ -86,14 +92,14 @@ public class LoginDao implements IDao<User> {
     }
 
     @Override
-    public User findById(int id) {
-        User user = null;
+    public Client findById(int id) {
+        Client client = null;
         Session session = null;
         Transaction tx = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            user = (User) session.get(User.class, id);
+            client = (Client) session.get(Client.class, id);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {
@@ -102,18 +108,18 @@ public class LoginDao implements IDao<User> {
         } finally {
             session.close();
         }
-        return user;
+        return client;
     }
 
     @Override
-    public List<User> findAll() {
-        List<User> users = null;
+    public List<Client> findAll() {
+        List<Client> clients = null;
         Session session = null;
         Transaction tx = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            users = session.createQuery("from User").list();
+            clients = session.createQuery("from Client").list();
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {
@@ -122,17 +128,17 @@ public class LoginDao implements IDao<User> {
         } finally {
             session.close();
         }
-        return users;
+        return clients;
     }
     
-    public static User findByEmail(String email) {
-        User user = null;
+    public Client findByEmail(String email) {
+        Client client = null;
         Session session = null;
         Transaction tx = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             tx = session.beginTransaction();
-            user = (User) session.getNamedQuery("findByEmail").setParameter("email", email).uniqueResult();
+            client = (Client) session.getNamedQuery("findByEmail").setParameter("email", email).uniqueResult();
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {
@@ -141,7 +147,7 @@ public class LoginDao implements IDao<User> {
         } finally {
             session.close();
         }
-        return user;
+        return client;
     }
     public List<Produit> listAll() {
          List<Produit> produits = null;
@@ -161,33 +167,4 @@ public class LoginDao implements IDao<User> {
          }
          return produits;
 }
-    
-     public boolean validate(String userName, String password) {
-
-        User user = null;
-        Session session = null;
-        Transaction tx = null;
-        try  {
-            session = HibernateUtil.getSessionFactory().openSession();
-          tx = session.beginTransaction();
-            user = (User) session.createQuery("FROM User U WHERE U.email = :userName").setParameter("userName", userName).uniqueResult();
-        
-            if (user != null && user.getPassword().equals(password)) {
-                return true;
-            }
-            tx.commit();
-        } catch (HibernateException e ) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-   
-
-   
-
 }
-

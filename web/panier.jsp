@@ -602,7 +602,7 @@ a .uil {
                                 <td><%= l.getQuantité() %></td>
                                 <td><%= l.getPrixVente() %></td>
                                 
-                                <td><button type="button" class="button-85 supprimer"> <a href="./DeleteLigneCommande?id=<%= l. getProduit().getId() %> ">Supprimer</button></td>
+                                <td><button type="button" class="button-85 supprimer"> <a href=./DeleteFromCart?idproduit=<%= l.getProduit().getId()%>&idcommande=<%= l.getCommande().getId()%> >Supprimer</button></td>
                                 
                             </tr>
                          <%}%>  
